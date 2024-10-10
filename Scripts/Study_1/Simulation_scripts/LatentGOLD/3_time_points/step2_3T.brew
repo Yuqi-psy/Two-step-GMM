@@ -1,0 +1,72 @@
+//LG6.0//
+version = 6.0
+infile 'SimData.csv' quote = single
+
+
+model
+title study1_step2_3;
+options
+   maxthreads=8;
+   algorithm 
+      tolerance=1e-08 emtolerance=0,01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-05 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-08;
+   quadrature  nodes=10;
+   missing  includeall;
+   output      
+      parameters=first  betaopts=wl standarderrors profile probmeans=posterior
+      estimatedvalues=regression loadings
+ append='step2_<%=condition%>_<%=size%>_3.csv';
+
+variables
+   caseid id;
+   dependent item1.1 continuous, item1.2 continuous, item1.3 continuous,
+	     item2.1 continuous, item2.2 continuous, item2.3 continuous, 
+             item3.1 continuous, item3.2 continuous, item3.3 continuous;
+   independent cov1; 
+   latent
+      F1 continuous, 
+      F2 continuous, 
+      Class nominal 2;
+
+equations
+  Class <- 1+ cov1;
+   (f)F1 | Class;
+   (g)F2 | Class;
+   (h)F1 <-> F2 | Class;
+   F1 <-  (a)1 | Class;
+   F2 <-  (b)1 | Class;
+
+  item1.1 <- (1)F1 + (0)F2|class;
+  item1.2 <- (1)F1 + (1)F2|class;
+  item1.3 <- (1)F1 + (2)F2|class;
+  (c1)item1.1;
+  (c2)item1.2;
+  (c3)item1.3;
+ 
+  item2.1 <- (1)F1 + (0)F2|class;
+  item2.2 <- (1)F1 + (1)F2|class;
+  item2.3 <- (1)F1 + (2)F2|class;
+  (d1)item2.1;
+  (d2)item2.2;
+  (d3)item2.3;
+
+  item3.1 <- (1)F1 + (0)F2|class;
+  item3.2 <- (1)F1 + (1)F2|class;
+  item3.3 <- (1)F1 + (2)F2|class;
+  (e1)item3.1;
+  (e2)item3.2;
+  (e3)item3.3;
+
+ a b c1 c2 c3 d1 d2 d3 e1 e2 e3 f[1,1] h[1,1] g[1,1] f[2,1] h[2,1] g[2,1] =
+{
+<%=bpars%>
+};
+
+
+
+end model
