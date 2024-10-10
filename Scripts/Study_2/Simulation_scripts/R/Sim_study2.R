@@ -1,4 +1,4 @@
-
+library(dplyr)
 
 ########## Study 2 population model parameters ##########
 
@@ -18,16 +18,24 @@ Var_items6 <- list(c(rep(1,18))) # variance of items for 6 time points
 Sigma_1 <- list(c(1, -0.15, 1)) # variance-covariance of growth factors for latent class 1
 Sigma_2 <- list(c(1, -0.15, 1)) # variance-cpvariance of growth factors for latent class 2
 
+conditions <- c("EH", # "EH": equal class proportions  and high entropy
+                "UH", # "UH": unequal class proportions and high entropy
+                "EL", # "EL": equal class proportions and low entropy
+                "UL") # "EH": equal class proportions and low entropy
+
+
+
+
 # Create population model parameters grid
 parasample_pop <- expand.grid(Int_lc=Int_lc, Slo_lc=Slo_lc_cov12, # regression coefficient for the latent class variable
                               Int_i0=Int_i0, Int_i1=Int_i1, # regression coefficient for the latent intercept variable
                               Slo_s0=Slo_s0, # regression coefficient for the latent slope variable
                                Var_items=Var_items6,
-                              Sigma_1=Sigma_1, Sigma_2=Sigma_2) # !!Remember to specify the time points)
+                              Sigma_1=Sigma_1, Sigma_2=Sigma_2) %>% rownames(conditions)
 rownames(parasample_pop) <- c("EH", "UH", "EL", "UL") # "EH": equal proportion  and high entropy
-                                                  # "UH": unequal proportion and high entropy
-                                                  # "EL": equal proportion and low entropy
-                                                  # "EH": equal proportion and low entropy
+                                                      # "UH": unequal proportion and high entropy
+                                                      # "EL": equal proportion and low entropy
+                                                      # "EH": equal proportion and low entropy
 # Create population model parameters grid (step one model)
 
 parasample_onestepA <- expand.grid(Int_lc=Int_lc, Slo_lc=Slo_lc_cov12,
