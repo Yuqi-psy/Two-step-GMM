@@ -3,30 +3,30 @@ library(dplyr)
 library(brew)
 
 # Specify the LatentGOLD syntex folder address
-setwd( )
+setwd( "~/Documents/GitHub/Two-step-GMM-code/Project_1/Scripts/Study_3/Simulation_scripts/LatentGOLD" )
 
 # Define parameters and manipulated factors
-  # Regression coefficients
-  beta_0 <- list(-1.5, -0.43)
-  beta_x1 <- c(-0.50)
-  beta_x2 <- c(0.75)
-  beta_x1x2 <- list(c(-0.50, 0.75)) # latent class variables
-  
-  # Latent class variables
-  alpha_0 <- list(c(1.5, -1.5), c(0.5, -0.5))
-  alpha_1 <- list(c(-0.2, 0.2))
-  gamma_0 <- list(c(0.5, -0.5)) 
-  gamma_1 <- list(c(0.25,-0.25)) # growth factors
-  
-  # Variance and covariance
-  theta3 <- list(rep(1, 9)) # three time points
-  theta6 <- list(rep(1, 18)) # six time points
-  
-  Sigma_1 <- list(c(1, -0.15, 1)) # for class 1
-  Sigma_2 <- list(c(1, -0.15, 1)) # for class 2
-  
-  # Sample size
-  samplesize <- matrix(c('casesum500', 'casesum1000'), nrow = 2, dimnames = list(c("500", "1000")))
+# Regression coefficients
+beta_0 <- list(-1.5, -0.43)
+beta_x1 <- c(-0.50)
+beta_x2 <- c(0.75)
+beta_x1x2 <- list(c(-0.50, 0.75)) # latent class variables
+
+# Latent class variables
+alpha_0 <- list(c(1.5, -1.5), c(0.5, -0.5))
+alpha_1 <- list(c(-0.2, 0.2))
+gamma_0 <- list(c(0.5, -0.5))
+gamma_1 <- list(c(0.25,-0.25)) # growth factors
+
+# Variance and covariance
+theta3 <- list(rep(1, 9)) # three time points
+theta6 <- list(rep(1, 18)) # six time points
+
+Sigma_1 <- list(c(1, -0.15, 1)) # for class 1
+Sigma_2 <- list(c(1, -0.15, 1)) # for class 2
+
+# Sample size
+samplesize <- matrix(c('casesum500', 'casesum1000'), nrow = 2, dimnames = list(c("500", "1000")))
 
 # Create population model parameters grid
 create_parasample <- function(..., rownames_list = c("EH", "UH", "EL", "UL")) { 
@@ -35,11 +35,15 @@ create_parasample <- function(..., rownames_list = c("EH", "UH", "EL", "UL")) {
   rownames(parasample) <- rownames_list
   return(parasample)
 }
+# "EH": equal proportion  and high entropy
+# "UH": unequal proportion and high entropy
+# "EL": equal proportion and low(relative) entropy
+# "EH": equal proportion and low(relative) entropy
 
-# Assign parameters of population model II
+# Assign parameters of population model III
 parasample_pop <- create_parasample(beta_0=beta_0, beta_x1x2=beta_x1x2, 
-                                     alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, 
-                                     theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2)
+                                    alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, gamma_1=gamma1,
+                                    theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2)
 
 # Assign starting values for nine estimators (prevent class switching problem)
 parasample_onestepA <- create_parasample(beta_0=beta_0, beta_x1x2=beta_x1x2, 
@@ -49,7 +53,7 @@ parasample_onestepB <- create_parasample(beta_0=beta_0, beta_x1x2=beta_x1x2,
                                          alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, 
                                          theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2)
 parasample_onestepC <- create_parasample(beta_0=beta_0, beta_x1x2=beta_x1x2, 
-                                         alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, gamma_1=gamma_1,
+                                         alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, gamma_1=gamma1,
                                          theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2) # one step models
 
 parasample_steponeA <- create_parasample(beta_0=beta_0, 
@@ -59,7 +63,7 @@ parasample_steponeB <- create_parasample(beta_0=beta_0, beta_x2=beta_x2,
                                          alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, 
                                          theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2)
 parasample_steponeC <- create_parasample(beta_0=beta_0, beta_x2=beta_x2, 
-                                         alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, gamma_1=gamma_1,
+                                         alpha_0=alpha_0, gamma_0=gamma_0, alpha_1=alpha_1, gamma_1=gamma1,
                                          theta=theta3, Sigma_1=Sigma_1, Sigma_2=Sigma_2) # step one models of step-wise estimators
 
 parasample <- list(parasample_pop=parasample_pop, 
@@ -102,7 +106,7 @@ models <- models_3T
 # Simulation
 library(brew)
 source(
-  "/Users/liuyuqi/Documents/GitHub/Two-step-GMM-code/Project_1/Scripts/Study_2/Simulation_scripts/R/run.template.R"
+  "~/Documents/GitHub/Two-step-GMM-code/Project_1/Scripts/Study_3/Simulation_scripts/R/run.template.R"
 )
 # Specify 
 modeltype <- c("A", "B", "C")
@@ -111,7 +115,8 @@ for (i in 1:nsim)
   for (j in 1:length(samplesize))
   {
     for (n in 1:nrow(parasample_pop)) {
-      # Generating simulated data from population model II
+      
+      # Generating simulated data from population model III
       envir <- new.env()
       assign("samplesize", samplesize[j], envir = envir)  # label the sample size condition
       assign("sampleparameters", unlist(parasample_pop[n, ]), envir = envir)  # label the entropy and proportion conditions
@@ -168,7 +173,7 @@ for (i in 1:nsim)
         )
       )	 # specification B
       
-
+      
       envir <- new.env()
       assign("size", rownames(samplesize)[j], envir = envir)
       assign("condition", rownames(parasample_onestepC)[n], envir = envir) 
@@ -298,9 +303,9 @@ for (i in 1:nsim)
           "/b"
         )
       )=
-      
-      # step 2 model
-      DAT <- paste("step2pars_C", ".dat", sep = "")
+        
+        # step 2 model
+        DAT <- paste("step2pars_C", ".dat", sep = "")
       bpars <- as.matrix(read.table(DAT, sep = " ", dec = ","))
       envir <- new.env()
       assign("condition", rownames(parasample_steponeC)[n], envir = envir) 

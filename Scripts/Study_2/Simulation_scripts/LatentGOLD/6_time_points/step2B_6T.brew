@@ -4,7 +4,7 @@ infile 'SimData.csv' quote = single
 
 
 model
-title study2_step2B_3;
+title study2_step2A2_6;
 options
    maxthreads=8;
    algorithm 
@@ -20,25 +20,26 @@ options
    output      
       parameters=first  betaopts=wl standarderrors profile probmeans=posterior
       estimatedvalues=regression loadings
- append='step2B_<%=condition%>_<%=size%>_6.csv';
+ append='step2A2_<%=condition%>_<%=size%>_6.csv';
 
 variables
    caseid id;
    dependent item1.1 continuous, item1.2 continuous, item1.3 continuous, item1.4 continuous, item1.5 continuous, item1.6 continuous,
 	     item2.1 continuous, item2.2 continuous, item2.3 continuous, item2.4 continuous, item2.5 continuous, item2.6 continuous,
              item3.1 continuous, item3.2 continuous, item3.3 continuous, item3.4 continuous, item3.5 continuous, item3.6 continuous;
-independent cov1, cov2;  
+independent cov1, cov2; 
    latent
       F1 continuous, 
       F2 continuous, 
       Class nominal 2;
 equations
-  Class <- (a)1+ cov1 + (b)cov2;
+  Class <- 1+ cov1 + cov2;
    (k)F1 | Class;
    (l)F2 | Class;
    (m)F1 <-> F2 | Class;
-   F1 <- (d)1 | Class + (e)cov2 | class;
-   F2 <- (f)1 | Class + (g)cov2 | class;
+   F1 <- (a)1 | Class + (b)cov2 | Class;
+   F2 <- (c)1 | Class;
+  
 
   item1.1 <- (1)F1 + (0)F2|class;
   item1.2 <- (1)F1 + (1)F2|class;
@@ -80,10 +81,9 @@ equations
   (j6)item3.6; 
 
 
-
- d e f g h1 h2 h3 h4 h5 h6 i1 i2 i3 i4 i5 i6 j1 j2 j3 j4 j5 j6 k[1,1] m[1,1] l[1,1] k[2,1] m[2,1] l[2,1] =
+a b c h1 h2 h3 h4 h5 h6 i1 i2 i3 i4 i5 i6 j1 j2 j3 j4 j5 j6 k[1,1] m[1,1] l[1,1] k[2,1] m[2,1] l[2,1] =
 {
-<%=step1c_pars%>
+<%=step1b_pars%>
 };
 
 
