@@ -4,7 +4,6 @@ library(tidyr)
 library(kableExtra)
 library(DescTools)
 # Read akableExtra# Read all results files
-# 设置文件夹路径
 folder_path <- "C:\\Users\\liuy16\\OneDrive - Universiteit Leiden\\Project_1\\Results\\study1\\1.5\\3T\\step_three"
 
 setwd( "/Users/liuyuqi/Library/CloudStorage/OneDrive-UniversiteitLeiden/Project_1/Results/study1")
