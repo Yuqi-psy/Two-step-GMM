@@ -95,7 +95,7 @@ for(i in 1:nsim)
       brewfile <- paste(population_model, ".brew", sep="")
       run.template(brewfile, envir= envir, temp.filename.base=population_model)
       lgsfile <- paste(population_model, ".lgs", sep="")
-      shell(paste("C:\\Users\\liuy16\\Downloads\\LatentGOLD6.0\\lg60.exe", lgsfile, "/b"))
+      shell(paste("C:~\\lg60.exe", lgsfile, "/b")) # the latentGOLD address 
       
       
       # One-step full information maximum likelihood estimator 
@@ -106,7 +106,7 @@ for(i in 1:nsim)
       brewfile1 <- paste(onestep, ".brew", sep="")
       run.template(brewfile1, envir=envir, temp.filename.base=onestep) 
       lgsfile1 <- paste(onestep, ".lgs", sep="")
-      shell(paste("C:\\Users\\liuy16\\Downloads\\LatentGOLD6.0\\lg60.exe",
+      shell(paste("C:~\\lg60.exe",
                   lgsfile1, "/b"))	 #run LG form R 
       
       # Two-step and three-step estimators
@@ -118,7 +118,7 @@ for(i in 1:nsim)
       brewfile2 <- paste(stepone, ".brew", sep="")
       run.template(brewfile2, envir=envir, temp.filename.base=stepone) .
       lgsfile2 <- paste(stepone, ".lgs", sep="")
-      shell(paste("C:\\Users\\liuy16\\Downloads\\LatentGOLD6.0\\lg60.exe",
+      shell(paste("C:~\\lg60.exe",
                   lgsfile2, "/b"))
       
       # step 2 model
@@ -131,14 +131,14 @@ for(i in 1:nsim)
       brewfile4 <- paste(steptwo, ".brew", sep="")
       run.template(brewfile4, envir=envir, temp.filename.base=steptwo)
       lgsfile4 <- paste(steptwo, ".lgs", sep="")
-      shell(paste("C:\\Users\\liuy16\\Downloads\\LatentGOLD6.0\\lg60.exe",
+      shell(paste("C:~\\lg60.exe",
                   lgsfile4, "/b"))
       
       # step 3 model
       brewfile4 <- paste(stepthree, ".brew", sep="")
       run.template(brewfile4, envir=envir, temp.filename.base=stepthree).
       lgsfile4 <- paste(stepthree, ".lgs", sep="")
-      shell(paste("C:\\Users\\liuy16\\Downloads\\LatentGOLD6.0\\lg60.exe",
+      shell(paste("C:~\\lg60.exe",
                   lgsfile4, "/b"))	
     }
   }
