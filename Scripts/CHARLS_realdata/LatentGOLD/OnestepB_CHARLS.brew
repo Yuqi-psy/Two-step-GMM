@@ -1,0 +1,53 @@
+//LG6.0//
+version = 6.0
+infile 'CHARLS_cog.csv' quote = single
+
+
+model
+title OnestepB_CHARLS;
+options
+   maxthreads=8;
+   algorithm 
+      tolerance=1e-08 emtolerance=0,01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-05 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-08;
+   quadrature  nodes=10;
+   missing  includeall;
+   output      
+      parameters=effect  betaopts=wl standarderrors profile probmeans=posterior
+      estimatedvalues=regression loadings
+ append='onestepB_CHARLS.csv';
+
+variables
+	caseid id;
+	dependent
+		cog_function1 continuous, cog_function2 continuous, 
+		cog_function3 continuous, cog_function4 continuous;
+	independent age, ragender, raeducl, r1cesd10;
+	latent
+      F1 continuous, 
+      F2 continuous, 
+      Class nominal  <%=classnumber%>;
+equations
+	Class <- 1 +age + raeducl;
+	F1 | Class;
+	F2 | Class;
+	F1 <-> F2 | Class;
+	F1 <- 1 | Class + raeducl|class;
+	F2 <- 1 | Class;
+
+
+	cog_function1 <- (1)F1 + (0)F2|class;
+	cog_function2 <- (1)F1 + (1)F2|class;
+	cog_function3 <- (1)F1 + (2)F2|class;
+	cog_function4 <- (1)F1 + (3)F2|class;
+	cog_function1;
+	cog_function2;
+	cog_function3;
+	cog_function4;
+
+end model

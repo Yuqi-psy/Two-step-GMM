@@ -1,0 +1,34 @@
+//LG6.0//
+version = 6.0
+infile 'classification_<%=modeltype%>.dat' quote = single
+
+
+model
+title Step3<%=model%>_CHARLS;
+options
+   maxthreads=8;
+   algorithm 
+      tolerance=1e-08 emtolerance=0,01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-05 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-08;
+   quadrature  nodes=10;
+   missing  includeall;
+   step3 proportional ml;
+   output      
+      parameters=effect profile standarderrors
+       append='step3A_CHARLS.csv';
+ variables
+   caseid id;
+   independent age, ragender, raeducl, r1cesd10;
+
+   latent
+ Class nominal posterior = ( Class#1 Class#2);
+
+equations
+ Class <- 1 +age + raeducl;
+
+end model
