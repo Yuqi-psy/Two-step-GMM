@@ -17,39 +17,37 @@ File in the top level of **Scripts/**
 
 -   *README.Rmd* This document.
 
-**CHARLS_realdata/** (sub-folder of **Scripts/**: contain the models syntax and R code for processing and analysing CHARLS data)
+**CHARLS_realdata/** (sub-folder of **Scripts/**: contains the models syntax and R scripts for processing and analysing CHARLS data)
 
 -   **LatentGOLD/** (sub-folder of **CHARLS_realdata/**: contain the LatentGOLD syntax files for different models)
 
-*Classenum_CHARLS.brew*, *OnestepA_CHARLS.brew*, *OnestepB_CHARLS.brew*, *OnestepC_CHARLS.brew*...
+*Classenum_CHARLS.brew*, *OnestepA_CHARLS.brew*, *OnestepB_CHARLS.brew*, *OnestepC_CHARLS.brew*,...**Step3A_CHARLS.brew**
+
+*NOTE:* These 12 files will be used for assigning labels and generating the corresponding `.lgs` file when the **CHARLS_Analysis.R** scripts are executed.
+
+-   **R/** (sub-folder of **CHARLS_realdata/**: contain the R code for calling LatentGOLD to run the analysis)
+
+**CHARLS_Process.R**: CHARLS raw data cleaning and processing scripts.
+
+**CHARLS_Analysis.R**: CHARLS_cog data analysis scripts. When the scripts are executed, the `.brew` files will be written and generate the corresponding `.lgs` file for running the model in LatentGOLD, and the results files will be written by LatentGOLD.
+
+**run.template.R**: Function scripts for calling LatentGOLD.
 
 
-*NOTE:* These 12 files will be used for assigning labels and generating the corresponding `.lgs` file when the **CHARLS_Analysis.R** scripts are executed. 
+**Study_1/** (sub-folder of **Scripts/**: contains the models syntax and R scripts for conducting simulation study 1)
 
--   **R/** (sub-folder of **CHARLS_realdata/**: contain the R code for assigning ladels, generating `.lgs` files and calling LatentGOLD to run the models )
 
-**CHARLS_Process.R**: Raw CHARLS data cleaning and processing file
+-   **LatentGOLD/** (sub-folder of **Study_1/**: contains the LatentGOLD syntax files for different models at different time points conditions)
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+**3_time_points/** (sub_folder of **LatentGOLD/**: contains the LatentGOLD syntax at 3 time points conditions in study 1)
 
-## R Markdown
+**datasimcont3.csv**: Data file specify the starting values of population model I at 3 time points conditions.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+**DatGen_3T.brew**: Brew file contains the LatentGOLD syntex for simulation dataset from population model I at three time points conditions. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+**onestep_3T.brew**, **step1_3T.brew**, **step2_3T.brew**, **step3_3T.brew**
 
-```{r cars}
-summary(cars)
-```
+*NOTE:* These `.brew` files will be written for assigning parameters and generating the corresponding `.lgs` file when the **Sim_study1.R** scripts are executed.
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
