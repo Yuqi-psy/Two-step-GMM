@@ -1,0 +1,55 @@
+---
+title: "Read Me File"
+author: "YUQI LIU"
+date: "2024-10-17"
+output: html_document
+---
+
+The scripts of simulation studies and real data example for this paper were conducted with LatentGOLD 6.0 and R version 4.4.1, on a Windows operating system.
+
+## Part 1: The content and organization of the documentation
+
+The documentation for this paper is stored in a set of folders and subfolders, organized as outlined below:
+
+**Scripts/**(the main script folder)
+
+File in the top level of **Scripts/**
+
+-   *README.Rmd* This document.
+
+**CHARLS_realdata/** (sub-folder of **Scripts/**: contain the models syntax and R code for processing and analysing CHARLS data)
+
+-   **LatentGOLD/** (sub-folder of **CHARLS_realdata/**: contain the LatentGOLD syntax files for different models)
+
+*Classenum_CHARLS.brew*, *OnestepA_CHARLS.brew*, *OnestepB_CHARLS.brew*, *OnestepC_CHARLS.brew*...
+
+
+*NOTE:* These 12 files will be used for assigning labels and generating the corresponding `.lgs` file when the **CHARLS_Analysis.R** scripts are executed. 
+
+-   **R/** (sub-folder of **CHARLS_realdata/**: contain the R code for assigning ladels, generating `.lgs` files and calling LatentGOLD to run the models )
+
+**CHARLS_Process.R**: Raw CHARLS data cleaning and processing file
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
