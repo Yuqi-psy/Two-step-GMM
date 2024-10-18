@@ -5,49 +5,177 @@ date: "2024-10-17"
 output: html_document
 ---
 
-The scripts of simulation studies and real data example for this paper were conducted with LatentGOLD 6.0 and R version 4.4.1, on a Windows operating system.
+# README
 
-## Part 1: The content and organization of the documentation
+The scripts for the simulation studies and real data example in this project were conducted using **LatentGOLD 6.0** and **R version 4.4.1**, on a **Windows operating system**.
 
-The documentation for this paper is stored in a set of folders and subfolders, organized as outlined below:
+## Part 1: Content and organization of the documentation:
 
-**Scripts/**(the main script folder)
+The documentation for this project is organized into a set of folders and subfolders, as described below:
 
-File in the top level of **Scripts/**
+### **Scripts/** (Main Script Folder)
 
--   *README.Rmd* This document.
+-   **README.Rmd**: This document.
 
-**CHARLS_realdata/** (sub-folder of **Scripts/**: contains the models syntax and R scripts for processing and analysing CHARLS data)
+### **CHARLS_realdata/** (Subfolder of **Scripts/**: Contains model syntax and R scripts for processing and analyzing CHARLS data)
 
--   **LatentGOLD/** (sub-folder of **CHARLS_realdata/**: contain the LatentGOLD syntax files for different models)
+-   **LatentGOLD/** (Subfolder of **CHARLS_realdata/**: Contains LatentGOLD syntax files for different models)
 
-*Classenum_CHARLS.brew*, *OnestepA_CHARLS.brew*, *OnestepB_CHARLS.brew*, *OnestepC_CHARLS.brew*,...**Step3A_CHARLS.brew**
+    -   *Classenum_CHARLS.brew*
+    -   *OnestepA_CHARLS.brew*
+    -   *OnestepB_CHARLS.brew*
+    -   *OnestepC_CHARLS.brew*
+    -   *Step1A_CHARLS.brew*
+    -   *Step1B_CHARLS.brew*
+    -   *Step1C_CHARLS.brew*
+    -   *Step2A_CHARLS.brew*
+    -   *Step2B_CHARLS.brew*
+    -   *Step2C_CHARLS.brew*
+    -   *Step3_CHARLS.brew*
+    -   *Step3A_CHARLS.brew*
 
-*NOTE:* These 12 files will be used for assigning labels and generating the corresponding `.lgs` file when the **CHARLS_Analysis.R** scripts are executed.
+    *Note:* These 12 `.brew` files are used to assign labels and generate the corresponding `.lgs` files when the **CHARLS_Analysis.R** script is executed.
 
--   **R/** (sub-folder of **CHARLS_realdata/**: contain the R code for calling LatentGOLD to run the analysis)
+-   **R/** (Subfolder of **CHARLS_realdata/**: Contains R scripts for calling LatentGOLD to run the analysis)
 
-**CHARLS_Process.R**: CHARLS raw data cleaning and processing scripts.
+    -   **CHARLS_Process.R**: Script for cleaning and processing CHARLS raw data.
+    -   **CHARLS_Analysis.R**: Script for analyzing CHARLS cognitive data. This script generates `.brew` files, which are used to create corresponding `.lgs` files for running models in LatentGOLD. Results are output by LatentGOLD.
+    -   **run.template.R**: Function script for calling LatentGOLD.
 
-**CHARLS_Analysis.R**: CHARLS_cog data analysis scripts. When the scripts are executed, the `.brew` files will be written and generate the corresponding `.lgs` file for running the model in LatentGOLD, and the results files will be written by LatentGOLD.
+### **Study_1/** (Subfolder of **Scripts/**: Contains model syntax and R scripts for conducting Simulation Study 1)
 
-**run.template.R**: Function scripts for calling LatentGOLD.
+-   **LatentGOLD/** (Subfolder of **Study_1/**: Contains LatentGOLD syntax files for different time point conditions)
 
+    -   **3_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for three time points conditions in Study 1)
 
-**Study_1/** (sub-folder of **Scripts/**: contains the models syntax and R scripts for conducting simulation study 1)
+        -   **datasimcont3.csv**: Data file specifying the starting values of Population Model I for three time points conditions.
+        -   **DatGen_3T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model I at three time points.
+        -   **onestep_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators at three time points conditions.
+        -   **step1_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators at three time points conditions.
+        -   **step2_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators at three time points conditions.
+        -   **step3_3T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator at three time points conditions.
 
-
--   **LatentGOLD/** (sub-folder of **Study_1/**: contains the LatentGOLD syntax files for different models at different time points conditions)
-
-**3_time_points/** (sub_folder of **LatentGOLD/**: contains the LatentGOLD syntax at 3 time points conditions in study 1)
-
-**datasimcont3.csv**: Data file specify the starting values of population model I at 3 time points conditions.
-
-**DatGen_3T.brew**: Brew file contains the LatentGOLD syntex for simulation dataset from population model I at three time points conditions. 
-
-**onestep_3T.brew**, **step1_3T.brew**, **step2_3T.brew**, **step3_3T.brew**
-
-*NOTE:* These `.brew` files will be written for assigning parameters and generating the corresponding `.lgs` file when the **Sim_study1.R** scripts are executed.
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
 
 
+    -   **6_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for six time points conditions in Study 1)
 
+        -   **datasimcont6.csv**: Data file specifying the starting values of Population Model I for six time points conditions.
+        -   **DatGen_6T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model I at six time points conditions.
+        -   **DatGen_6T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model I at six time points.
+        -   **onestep_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators at six time points conditions.
+        -   **step1_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators at six time points conditions.
+        -   **step2_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators at six time points conditions.
+        -   **step3_6T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator at six time points conditions.
+
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
+
+
+-   **R/** (Subfolder of **Study_1/**: Contains R scripts for calling LatentGOLD to run the simulation)
+
+    -   **Sim_study1.R**: Script for running simulation study 1. This scripts will write `.brew` file of models, which are used to create corresponding `.lgs` files for running models in LatentGOLD. The results will be wriiten on the corresponding ".csv" data files by LatentGOLD.
+    -   **run.template.R**: Function script for calling LatentGOLD.
+
+### **Study_2/** (Subfolder of **Scripts/**: Contains model syntax and R scripts for conducting Simulation Study 2)
+
+-   **LatentGOLD/** (Subfolder of **Study_2/**: Contains LatentGOLD syntax files for different time point conditions)
+
+    -   **3_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for three time points conditions in Study 2)
+
+        -   **datasimcont3.csv**: Data file specifying the starting values of Population Model II for three time points conditions.
+        -   **DatGen_3T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model II at three time points.
+        -   **onestepA_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification A at three time points conditions.
+        -   **onestepB_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification B at three time points conditions.
+        -   **onestepC_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification C at three time points conditions.
+        -   **step1A_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification A at three time points conditions.
+        -   **step1B_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification B at three time points conditions.
+        -   **step1C_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification C at three time points conditions.
+        -   **step2A_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification A at three time points conditions.
+        -   **step2B_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification B at three time points conditions.
+        -   **step2C_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification C at three time points conditions.
+        -   **step3_3T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification B or C at three time points conditions.
+        -   **step3A_3T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification A at three time points conditions.
+
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
+
+    -   **6_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for six time points conditions in Study 2)
+
+        -   **datasimcont6.csv**: Data file specifying the starting values of Population Model II for six time points conditions.
+        -   **DatGen_6T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model II at six time points.
+        -   **onestepA_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification A at six time points conditions.
+        -   **onestepB_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification B at six time points conditions.
+        -   **onestepC_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification C at six time points conditions.
+        -   **step1A_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification A at six time points conditions.
+        -   **step1B_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification B at six time points conditions.
+        -   **step1C_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification C at six time points conditions.
+        -   **step2A_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification A at six time points conditions.
+        -   **step2B_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification B at six time points conditions.
+        -   **step2C_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification C at six time points conditions.
+        -   **step3_6T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification B or C at six time points conditions.
+        -   **step3A_6T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification A at six time points conditions.
+
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
+
+-   **R/** (Subfolder of **Study_1/**: Contains R scripts for calling LatentGOLD to run the simulation)
+
+    -   **Sim_study2.R**: Script for running simulation study 2. This scripts will write `.brew` file of models, which are used to create corresponding `.lgs` files for running models in LatentGOLD. The results will be wriiten on the corresponding ".csv" data files by LatentGOLD. 
+    -   **run.template.R**: Function script for calling LatentGOLD.
+
+### **Study_3/** (Subfolder of **Scripts/**: Contains model syntax and R scripts for conducting Simulation Study 3)
+
+-   **LatentGOLD/** (Subfolder of **Study_3/**: Contains LatentGOLD syntax files for different time point conditions)
+
+    -   **3_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for three time points conditions in Study 3)
+
+        -   **datasimcont3.csv**: Data file specifying the starting values of Population Model III for three time points conditions.
+        -   **DatGen_3T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model III at three time points.
+        -   **onestepA_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification A at three time points conditions.
+        -   **onestepB_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification B at three time points conditions.
+        -   **onestepC_3T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification C at three time points conditions.
+        -   **step1A_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification A at three time points conditions.
+        -   **step1B_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification B at three time points conditions.
+        -   **step1C_3T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification C at three time points conditions.
+        -   **step2A_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification A at three time points conditions.
+        -   **step2B_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification B at three time points conditions.
+        -   **step2C_3T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification C at three time points conditions.
+        -   **step3_3T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification B or C at three time points conditions.
+        -   **step3A_3T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification A at three time points conditions.
+
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
+
+
+    -   **6_time_points/** (Subfolder of **LatentGOLD/**: Contains LatentGOLD syntax files for six time points conditions in Study 3)
+
+        -   **datasimcont6.csv**: Data file specifying the starting values of Population Model III for six time points conditions.
+        -   **DatGen_6T.brew**: Brew file containing LatentGOLD syntax for simulating datasets from Population Model III at six time points.
+        -   **onestepA_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification A at six time points conditions.
+        -   **onestepB_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification B at six time points conditions.
+        -   **onestepC_6T.brew**: Brew file containing Latent GOLD syntax for running one-step estimators with specification C at six time points conditions.
+        -   **step1A_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification A at six time points conditions.
+        -   **step1B_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification B at six time points conditions.
+        -   **step1C_6T.brew**: Brew file containing Latent GOLD syntax for running step-one models of the step-wise estimators with specification C at six time points conditions.
+        -   **step2A_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification A at six time points conditions.
+        -   **step2B_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification B at six time points conditions.
+        -   **step2C_6T.brew**: Brew file containing Latent GOLD syntax for running step-two models of the step-wise estimators with specification C at six time points conditions.
+        -   **step3_6T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification B or C at six time points conditions.
+        -   **step3A_6T.brew**: Brew file containing Latent GOLD syntax for running step-three models of the three-step estimator with specification A at six time points conditions.
+
+        *Note:* These `.brew` files assign parameters and generate the corresponding `.lgs` files and results `.csv` files when the **Sim_study2.R** script is executed. All the `.lgs` files and the results `.csv` will be wtitten under the same folder of the coresponding `.brew` files.
+
+
+-   **R/** (Subfolder of **Study_1/**: Contains R scripts for calling LatentGOLD to run the simulation)
+
+    -   **Sim_study3.R**: Script for running simulation study 3. This scripts will write `.brew` file of models, which are used to create corresponding `.lgs` files for running models in LatentGOLD. The results will be wriiten on the corresponding ".csv" data files by LatentGOLD. 
+    -   **run.template.R**: Function script for calling LatentGOLD.
+    
+    
+    
+## Part 2: To reproduce the results of simulation studies reported in the text of the paper:
+
+-   1) Download or copy the **Script/** folder, and all of its contents, onto the computer you are working on.
+
+-   2) Install LatentGOLD, and specify the location of LatentGOLD on the **run.template.R** and simulation script of studies (i.e., **Sim_study3.R** fro simulation study 3 and **CHARLS_Analysis.R** for CHARLS data).
+
+-   3) Execute the **Sim_study[studynumber].R** script while specifying the working directory as the folder address of `.brew` files. 
+    
+    
